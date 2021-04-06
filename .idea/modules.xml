@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/dlms.iml" filepath="$PROJECT_DIR$/dlms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dlms-generator/dlms-generator.iml" filepath="$PROJECT_DIR$/dlms-generator/dlms-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dlms-server/dlms-server.iml" filepath="$PROJECT_DIR$/dlms-server/dlms-server.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,3 @@
+# Project exclude paths
+/dlms-generator/target/
+/dlms-server/target/
