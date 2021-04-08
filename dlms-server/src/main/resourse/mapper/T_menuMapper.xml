@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psx.server.mapper.T_menuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.psx.server.pojo.T_menu">
+        <id column="id" property="id" />
+        <result column="url" property="url" />
+        <result column="path" property="path" />
+        <result column="component" property="component" />
+        <result column="name" property="name" />
+        <result column="icon" property="icon" />
+        <result column="requireAuth" property="requireAuth" />
+        <result column="parentId" property="parentId" />
+        <result column="enabled" property="enabled" />
+    </resultMap>
+
+    <resultMap id="Menus" type="com.psx.server.pojo.T_menu" extends="BaseResultMap">
+        <collection property="children" ofType="com.psx.server.pojo.T_menu">
+            <id column="id2" property="id" />
+            <result column="url2" property="url" />
+            <result column="path2" property="path" />
+            <result column="component2" property="component" />
+            <result column="name2" property="name" />
+            <result column="icon2" property="icon" />
+            <result column="requireAuth2" property="requireAuth" />
+            <result column="parentId2" property="parentId" />
+            <result column="enabled2" property="enabled" />
+        </collection>
+    </resultMap>
+    <select id="getMenusByUserId" resultMap="Menus">
+        SELECT
+            DISTINCT
+            m2.*,
+            m1.id AS id2,
+            m1.url AS url2,
+            m1.path AS path2,
+            m1.component as component2,
+            m1.`name` as name2,
+            m1.icon AS icon2,
+            m1.requireAuth as requireAuth2,
+            m1.parentId AS parentId2,
+            m1.enabled AS enabled2
+        FROM
+            t_menu m1,
+            t_menu m2,
+            t_menu_role mr,
+            t_user_role ar
+        WHERE
+            m2.id = m1.parentId
+          AND m2.id=mr.mid
+          AND mr.rid=ar.rid
+          AND ar.userid=#{id}
+          AND m2.enabled=TRUE
+
+    </select>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, url, path, component, name, icon, requireAuth, parentId, enabled
+    </sql>
+
+
+</mapper>
