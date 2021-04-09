@@ -66,10 +66,10 @@ public class CodeGenerator {
 
             // 数据源配置
             DataSourceConfig dsc = new DataSourceConfig();
-            dsc.setUrl("jdbc:mysql://localhost:3306/blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai");
+            dsc.setUrl("jdbc:mysql://localhost:3306/dlms?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai");
             // dsc.setSchemaName("public");
             dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-            dsc.setUsername("psx1");
+            dsc.setUsername("psx");
             dsc.setPassword("123123");
             mpg.setDataSource(dsc);
 
@@ -140,9 +140,9 @@ public class CodeGenerator {
             // 策略配置
             StrategyConfig strategy = new StrategyConfig();
             //数据库表映射到实体的命名策略
-            strategy.setNaming(NamingStrategy.no_change);
+            strategy.setNaming(NamingStrategy.underline_to_camel);
             //数据库表字段映射到实体的命名策略
-            strategy.setColumnNaming(NamingStrategy.no_change);
+            strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 
             //strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
             //lombok模型

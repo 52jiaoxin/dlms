@@ -1,7 +1,7 @@
 package com.psx.server.config.security;
 
-import com.psx.server.pojo.Admin;
-import com.psx.server.service.IAdminService;
+import com.psx.server.pojo.TUser;
+import com.psx.server.service.ITUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private IAdminService adminService;
+    private ITUserService adminService;
 
     @Autowired
     private RestAuthorizationEntryPoint restAuthorizationEntryPoint;
@@ -94,9 +94,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    重写UserDetailsService
     public UserDetailsService userDetailsService(){
         return username->{
-            Admin admin=adminService.getAdminByUsername(username);
-            if(admin!=null)
-                return admin;
+            TUser TUser =adminService.getAdminByUsername(username);
+            if(TUser !=null)
+                return TUser;
             return null;
         };
     }

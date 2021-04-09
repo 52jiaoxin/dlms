@@ -1,9 +1,9 @@
 package com.psx.server.controller;
 
-import com.psx.server.pojo.Admin;
+import com.psx.server.pojo.TUser;
 import com.psx.server.pojo.AdminLoginParam;
 import com.psx.server.pojo.RespBean;
-import com.psx.server.service.IAdminService;
+import com.psx.server.service.ITUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     @Autowired
-    private IAdminService adminService;
+    private ITUserService adminService;
 
 
     @ApiOperation(value = "用户登录之后返回token")
@@ -46,8 +46,8 @@ public class LoginController {
 
     @ApiOperation(value = "获取当前登录用户的信息")
     @GetMapping("/admin/info")
-    public Admin getAdminInfo(){
-        Admin principal= (Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取SpringSecurity上下文
+    public TUser getAdminInfo(){
+        TUser principal= (TUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();//获取SpringSecurity上下文
         if(principal==null)
             return null;
         principal.setPassword(null);

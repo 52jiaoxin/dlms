@@ -4,11 +4,75 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a181ef0-1a35-4a6f-8c4f-64893204a6a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/BookController.java" afterDir="false" />
+    <list default="true" id="6a181ef0-1a35-4a6f-8c4f-64893204a6a6" name="Default Changelist" comment="代码生成">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/controller/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/controller/BookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/controller/T_menuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/controller/T_menu_roleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/controller/T_roleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/controller/T_userController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/controller/T_user_roleController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/generator/CodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/generator/CodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/generator/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/generator/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/mapper/AdminMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/mapper/BookMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/mapper/T_menuMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/mapper/T_menu_roleMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/mapper/T_roleMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/mapper/T_userMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/mapper/T_user_roleMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/pojo/Admin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/pojo/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/pojo/T_menu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/pojo/T_menu_role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/pojo/T_role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/pojo/T_user.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/pojo/T_user_role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/IAdminService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/IBookService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/IT_menuService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/IT_menu_roleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/IT_roleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/IT_userService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/IT_user_roleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/imp/AdminServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/imp/BookServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/imp/T_menuServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/imp/T_menu_roleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/imp/T_roleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/imp/T_userServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/java/com/psx/service/imp/T_user_roleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/resources/mapper/AdminMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/resources/mapper/BookMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/TBookMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/resources/mapper/T_menuMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/resources/mapper/T_menu_roleMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/resources/mapper/T_roleMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/resources/mapper/T_userMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-generator/src/main/resources/mapper/T_user_roleMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/TUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/TBookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/TMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/AdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/TUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/BookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/TBookMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/T_menuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/TMenuMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/TUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/TBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/T_menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/TMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/IAdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/ITUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/IBookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/ITBookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/IT_menuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/ITMenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TBookServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/T_menuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TMenuServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/resourse/config/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/resourse/config/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/AdminMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/TUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/BookMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/T_menuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/TMenuMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +141,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
@@ -114,7 +178,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CodeGenerator">
+  <component name="RunManager" selected="Spring Boot.DlmsApplication (1)">
     <configuration name="CodeGenerator " type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.psx.generator.CodeGenerator" />
       <extension name="coverage">
@@ -153,13 +217,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -179,9 +245,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.DlmsApplication (1)" />
         <item itemvalue="Application.CodeGenerator" />
         <item itemvalue="Application.Generator" />
-        <item itemvalue="Spring Boot.DlmsApplication (1)" />
         <item itemvalue="Application.CodeGenerator " />
       </list>
     </recent_temporary>
@@ -202,8 +268,17 @@
       <workItem from="1617584954469" duration="207000" />
       <workItem from="1617585257530" duration="31333000" />
       <workItem from="1617703971325" duration="6193000" />
-      <workItem from="1617776146623" duration="9596000" />
+      <workItem from="1617776146623" duration="16072000" />
+      <workItem from="1617933594194" duration="8021000" />
     </task>
+    <task id="LOCAL-00001" summary="代码生成">
+      <created>1617849555169</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617849555169</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +294,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="代码生成" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码生成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
