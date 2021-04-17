@@ -66,5 +66,13 @@
     </select>
 
 
+    <select id="getUserByPage" resultType="com.psx.server.pojo.TUser">
+        select * from t_user
+        <if test="user.username!=null and user.username!=''">
+            WHERE
+            `username` like CONCAT('%',#{user.username},'%')
+        </if>
+        ORDER BY id
+    </select>
 
 </mapper>

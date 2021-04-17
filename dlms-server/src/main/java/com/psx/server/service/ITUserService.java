@@ -1,6 +1,7 @@
 package com.psx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.psx.server.pojo.RespPageBean;
 import com.psx.server.pojo.TUser;
 import com.psx.server.pojo.RespBean;
 
@@ -24,4 +25,6 @@ public interface ITUserService extends IService<TUser> {
     List<TUser> getEmpList(String username);
 
     List<TUser> getReaderList(String username);
+
+    RespPageBean getUserByPage(Integer currentPage, Integer size, TUser user);
 }

@@ -1,13 +1,13 @@
 package com.psx.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.psx.server.config.security.JwtTokenUtil;
 import com.psx.server.mapper.TUserMapper;
 import com.psx.server.mapper.TUserRoleMapper;
-import com.psx.server.pojo.RespBean;
-import com.psx.server.pojo.TUser;
-import com.psx.server.pojo.TUserRole;
+import com.psx.server.pojo.*;
 import com.psx.server.service.ITUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,6 +69,7 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
        if (userDetails==null||!passwordEncoder.matches(password,newPassword)){
            return RespBean.error("用户名或密码错误");
        }
+        System.out.println(userDetails);
        if (!userDetails.isEnabled())
            return RespBean.error("账号被禁用，请联系管理员");
        //更新security登录用户对象
@@ -94,7 +95,7 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     @Override
     public TUser getAdminByUsername(String username){
             //查询表中姓名为username且账户没有被禁用的一个数据
-            return userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username).eq("enable",true));
+            return userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username));
 
     }
 
@@ -130,4 +131,15 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     public List<TUser> getReaderList(String username) {
         return userMapper.getReaderList(username);
     }
+
+    @Override
+    public RespPageBean getUserByPage(Integer currentPage, Integer size, TUser user) {
+        //        开启分页
+        Page<TBook> page=new Page<>(currentPage,size);
+        IPage<TBook> bookIPage=userMapper.getUserByPage(page,user);
+        RespPageBean respPageBean=new RespPageBean(bookIPage.getTotal(),bookIPage.getRecords());
+        return respPageBean;
+    }
+
+
 }
