@@ -45,13 +45,13 @@ public class TMenu implements Serializable {
     @ApiModelProperty(value = "图标")
     private String icon;
 
-    @ApiModelProperty(value = "是否需要验证")
+    @ApiModelProperty(value = "是否需要验证",example = "1")
     private Integer requireAuth;
 
-    @ApiModelProperty(value = "父ID")
+    @ApiModelProperty(value = "父ID",example = "2")
     private Integer parentId;
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态",example = "1")
     private Integer enabled;
 
     @ApiModelProperty(value = "子菜单")

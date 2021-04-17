@@ -21,5 +21,7 @@ public interface ITUserService extends IService<TUser> {
     public TUser getAdminByUsername(String username);
     RespBean register(String username, String password, String code, HttpServletRequest request);
 
-    List<TUser> getUserList();
+    List<TUser> getEmpList(String username);
+
+    List<TUser> getReaderList(String username);
 }

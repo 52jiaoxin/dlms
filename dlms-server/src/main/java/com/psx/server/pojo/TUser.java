@@ -1,5 +1,7 @@
 package com.psx.server.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -29,7 +31,8 @@ public class TUser implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用户id",example = "110222")
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "用户名")
@@ -47,8 +50,8 @@ public class TUser implements Serializable, UserDetails {
     @ApiModelProperty(value = "头像")
     private String icon;
 
-    @ApiModelProperty(value = "状态（0不可用，1可以用）")
-    private Integer enable;
+    @ApiModelProperty(value = "状态（0不可用，1可以用）",example = "1")
+    private Boolean enable;
 
 
 

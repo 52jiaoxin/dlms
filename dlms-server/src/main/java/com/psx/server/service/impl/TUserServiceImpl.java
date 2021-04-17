@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.psx.server.config.security.JwtTokenUtil;
 import com.psx.server.mapper.TUserMapper;
-import com.psx.server.pojo.TUser;
+import com.psx.server.mapper.TUserRoleMapper;
 import com.psx.server.pojo.RespBean;
+import com.psx.server.pojo.TUser;
+import com.psx.server.pojo.TUserRole;
 import com.psx.server.service.ITUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +44,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
 
     @Autowired
     private TUserMapper userMapper;
+
+    @Autowired
+    private TUserRoleMapper userRoleMapper;
 
     /*/**
     * Description:登陆之后返回token
@@ -100,17 +105,29 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         if(code==null||!kaptcha.equalsIgnoreCase(code)){
             return RespBean.error("验证码输入错误！请重新输入");
         }
-        TUser TUser =new TUser();
-        TUser.setPassword(password);
-        TUser.setUsername(username);
-        if(userMapper.insertAdmin(TUser)==1){
+        if(userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username))!=null){
+            return RespBean.error("该用户名已存在！请重新输入用户名");
+        }
+        TUser user =new TUser();
+        user.setPassword(password);
+        user.setUsername(username);
+        System.out.println(user.getId());
+        if(userMapper.insertAdmin(user)==1){
+            TUserRole userRole=new TUserRole();
+            userRole.setUserid(userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username)).getId());
+            userRoleMapper.insert(userRole);
             return RespBean.error("注册成功！");
         }
         return RespBean.error("注册有误！请重新注册！");
     }
 
     @Override
-    public List<TUser> getUserList() {
-        return userMapper.selectList(new QueryWrapper<TUser>());
+    public List<TUser> getEmpList(String username) {
+        return userMapper.getEmpList(username);
+    }
+
+    @Override
+    public List<TUser> getReaderList(String username) {
+        return userMapper.getReaderList(username);
     }
 }

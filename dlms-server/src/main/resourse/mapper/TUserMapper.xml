@@ -18,10 +18,53 @@
         id, username, password, phone, address, icon, enable
     </sql>
 
-    <insert id="insertAdmin" parameterType="com.psx.server.pojo.TUser"
-            keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO TUser(id,username,password)
-        VALUES (#{id},#{username, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR} )
+    <insert id="insertAdmin" parameterType="com.psx.server.pojo.TUser">
+        INSERT INTO t_user(username,password)
+        VALUES (#{username, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR} )
     </insert>
+
+    <resultMap id="list" type="java.util.Map">
+        <id column="id2" property="id" />
+        <result column="id" property="userid" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" />
+        <result column="icon" property="icon" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <select id="getEmpList" resultMap="list">
+        select t1.*
+        from
+            t_user t1,
+            t_user_role t2,
+            t_role t3
+        where
+            t1.id=t2.userid
+          and t2.rid=t3.id
+          and t3.role != 'reader'
+            and t3.role!='root'
+        <if test="username!=null||username!=''">
+            and t1.username like CONCAT('%',#{username},'%')
+        </if>
+    </select>
+
+    <select id="getReaderList" resultMap="list">
+        select t1.*
+        from
+            t_user t1,
+            t_user_role t2,
+            t_role t3
+        where
+            t1.id=t2.userid
+          and t2.rid=t3.id
+          and t3.role = 'reader'
+            <if test="username!=null||username!=''">
+                and t1.username like CONCAT('%',#{username},'%')
+            </if>
+    </select>
+
+
 
 </mapper>

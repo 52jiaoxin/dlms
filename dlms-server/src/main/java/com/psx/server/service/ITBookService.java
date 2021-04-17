@@ -1,6 +1,7 @@
 package com.psx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.psx.server.pojo.RespPageBean;
 import com.psx.server.pojo.TBook;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface ITBookService extends IService<TBook> {
     List<TBook> getBookList();
 
     List<TBook> getBookListByType(String type);
+
+    RespPageBean getBookByPage(Integer currentPage, Integer size,TBook book);
+
+    List<TBook> exportBook(Integer id);
 }

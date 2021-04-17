@@ -32,4 +32,38 @@
         from t_book
         where category_id=#{type}
     </select>
+
+    <select id="getBookByPage" resultType="com.psx.server.pojo.TBook">
+        select * from t_book
+        WHERE
+              id is not null
+              <if test="book.name!=null and book.name!=''">
+                  and `name` like CONCAT('%',#{book.name},'%')
+              </if>
+            <if test="book.isbn!=null and book.isbn!=''">
+                and isbn like CONCAT('%',#{book.isbn},'%')
+            </if>
+            <if test="book.category_id!=null">
+                and category_id=#{book.category_id}
+            </if>
+            <if test="book.category_name!=null and book.category_name!=''">
+                and category_name like CONCAT('%',#{book.category_name},'%')
+            </if>
+            <if test="book.author!=null and book.author!=''">
+                and author like CONCAT('%',#{book.author},'%')
+            </if>
+            <if test="book.pulisher!=null and  book.pulisher!=''">
+                and pulisher like CONCAT('%',#{book.pulisher,'%')
+            </if>
+            ORDER BY id
+    </select>
+
+    <select id="exportBook" resultType="com.psx.server.pojo.TBook">
+        select * from t_book
+        <if test="id!=null">
+            WHERE
+            t_book.id=#{id}
+        </if>
+        ORDER BY t_book.id
+    </select>
 </mapper>

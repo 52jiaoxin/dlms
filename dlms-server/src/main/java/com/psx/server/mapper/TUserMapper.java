@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.psx.server.pojo.TUser;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -14,5 +16,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface TUserMapper extends BaseMapper<TUser> {
-    public int insertAdmin(TUser TUser);
+
+    public int insertAdmin(TUser user);
+    public List<TUser> getEmpList(String username);
+
+    List<TUser> getReaderList(String username);
+
+    int getUserByUsername(String username);
 }
