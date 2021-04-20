@@ -1,6 +1,7 @@
 package com.psx.server.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.psx.server.pojo.RespBean;
 import com.psx.server.pojo.RespPageBean;
 import com.psx.server.pojo.TUser;
@@ -73,6 +74,9 @@ public class TUserController {
     @ApiOperation(value = "添加用户")
     @PostMapping("/user/insert")
     public RespBean addUser(@RequestBody TUser tUser){
+      if (userService.getOne(new QueryWrapper<TUser>().eq("username",tUser.getUsername()))!=null){
+          return RespBean.error("该用户名已存在！请重新添加");
+      }
 //因为存在外键，所以需要在关连表添加数据
         if(userService.save(tUser)){
             TUserRole tUserRole=new TUserRole();

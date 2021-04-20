@@ -25,7 +25,7 @@
 
     <resultMap id="list" type="java.util.Map">
         <id column="id2" property="id" />
-        <result column="id" property="userid" />
+        <result column="id" property="id" />
         <result column="username" property="username" />
         <result column="password" property="password" />
         <result column="phone" property="phone" />
@@ -67,9 +67,17 @@
 
 
     <select id="getUserByPage" resultType="com.psx.server.pojo.TUser">
-        select * from t_user
+        select t1.*
+        from
+        t_user t1,
+        t_user_role t2,
+        t_role t3
+        where
+        t1.id=t2.userid
+        and t2.rid=t3.id
+        and t3.role = 'reader'
         <if test="user.username!=null and user.username!=''">
-            WHERE
+            and
             `username` like CONCAT('%',#{user.username},'%')
         </if>
         ORDER BY id

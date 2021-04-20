@@ -112,7 +112,6 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         TUser user =new TUser();
         user.setPassword(password);
         user.setUsername(username);
-        System.out.println(user.getId());
         if(userMapper.insertAdmin(user)==1){
             TUserRole userRole=new TUserRole();
             userRole.setUserid(userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username)).getId());

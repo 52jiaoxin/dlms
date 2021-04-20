@@ -24,4 +24,6 @@ public interface ITBookService extends IService<TBook> {
     RespPageBean getBookByPage(Integer currentPage, Integer size,TBook book);
 
     List<TBook> exportBook(Integer id);
+
+    boolean updateByIds(Integer[] borrowids);
 }

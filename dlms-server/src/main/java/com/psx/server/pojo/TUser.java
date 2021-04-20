@@ -53,6 +53,11 @@ public class TUser implements Serializable, UserDetails {
     @ApiModelProperty(value = "状态（0不可用，1可以用）",example = "1")
     private Boolean enable;
 
+    @ApiModelProperty(value = "可借数量")
+    private Integer enborrow;
+
+
+
 
 
     //实现UserDetails
