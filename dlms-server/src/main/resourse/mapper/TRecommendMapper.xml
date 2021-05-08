@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psx.server.mapper.TRecommendMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.psx.server.pojo.TRecommend">
+        <id column="id" property="id" />
+        <result column="bookid" property="bookid" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, bookid
+    </sql>
+
+    <select id="getRecommend" resultType="com.psx.server.pojo.TBook">
+        select t2.*
+        from
+            t_recommend t1,
+            t_book t2
+        WHERE
+            t1.bookid=t2.id
+    </select>
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psx.server.mapper.TBorrowhistoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.psx.server.pojo.TBorrowhistory">
+        <id column="id" property="id" />
+        <result column="userid" property="userid" />
+        <result column="bookid" property="bookid" />
+        <result column="borrowdate" property="borrowdate" />
+        <result column="returndate" property="returndate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, userid, bookid, borrowdate, returndate
+    </sql>
+
+
+    <resultMap id="history" type="java.util.Map" >
+            <id column="id2" property="id" />
+            <result column="id" property="id" />
+            <result column="userid" property="userid" />
+            <result column="username" property="username" />
+            <result column="bookid" property="bookid" />
+            <result column="bookname" property="bookname" />
+            <result column="borrowdate" property="borrowdate" />
+            <result column="returndate" property="returndate" />
+            <result column="isexpire" property="isexpire" />
+            <result column="img" property="img" />
+    </resultMap>
+    <select id="getBorrowHistory" resultMap="history">
+            select
+                   t3.id as id,
+                   t3.userid as userid,
+                   t1.username as username,
+                   t3.bookid as bookid,
+                   t2.name as bookname,
+                   t3.borrowdate as borrowdate,
+                   t3.returndate as returndate,
+                   t3.isexpire as isexpire,
+                   t2.img as img
+            from
+            t_user t1,
+            t_book t2,
+            t_borrowhistory t3
+            where
+            t3.userid=t1.id and
+            t3.bookid=t2.id
+            <if test="userid!='' and userid!=null">
+                and t1.id=#{userid}
+            </if>
+            <if test="bookid!='' and bookid!=null">
+                and t2.id=#{bookid}
+            </if>
+            <if test="username!='' and username!=null">
+                and t1.username like CONCAT('%',#{username},'%')
+            </if>
+            <if test="bookname!='' and bookname!=null">
+                and t2.name like CONCAT('%',#{bookname},'%')
+            </if>
+    </select>
+
+</mapper>
