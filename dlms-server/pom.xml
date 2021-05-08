@@ -86,11 +86,27 @@
           <artifactId>easypoi-spring-boot-starter</artifactId>
           <version>4.1.3</version>
       </dependency>
+<!--      日期转换需要使用-->
       <dependency>
           <groupId>com.fasterxml.jackson.datatype</groupId>
           <artifactId>jackson-datatype-jsr310</artifactId>
       </dependency>
-
+<!--      WebSocket依赖-->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-websocket</artifactId>
+      </dependency>
+<!--      FastDFS依赖-->
+      <dependency>
+          <groupId>org.csource</groupId>
+          <artifactId>fastdfs-client-java</artifactId>
+          <version>1.29-SNAPSHOT</version>
+      </dependency>
+<!--        mail依赖-->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-mail</artifactId>
+      </dependency>
   </dependencies>
 
 </project>

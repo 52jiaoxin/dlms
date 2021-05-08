@@ -8,11 +8,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-server/dlms-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/dlms-server.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/DlmsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/DlmsApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/JwtAuthencationTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/JwtAuthencationTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/swagger2/Swagger2Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/swagger2/Swagger2Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/TBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/TBookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/TUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller/TUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/TUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/mapper/TUserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/TUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/pojo/TUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/ITBookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/ITBookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TBookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TBookServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/ITUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/ITUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-server/src/main/resourse/config/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/resourse/config/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/TUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper/TUserMapper.xml" afterDir="false" />
@@ -25,10 +29,14 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
+        <option value="Kotlin File" />
         <option value="Class" />
       </list>
     </option>
@@ -78,7 +86,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dlms-server/src/main/resourse/mapper" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -89,7 +97,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -97,20 +105,20 @@
       <recent name="com.psx.pojo" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="H:\idea-project\dlms\dlms-server\src\main\resourse\mapper" />
       <recent name="H:\idea-project\dlms\dlms-server\src\main\java\com\psx\server\controller" />
       <recent name="H:\idea-project\dlms\dlms-server\src\main\java\com\psx\server\mapper" />
       <recent name="H:\idea-project\dlms\dlms-server\src\main\java\com\psx\server\pojo" />
       <recent name="H:\idea-project\dlms\dlms-server\src\main\java\com\psx\server\service\impl" />
-      <recent name="H:\idea-project\dlms\dlms-server\src\main\java\com\psx\server\service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="H:\idea-project\dlms\dlms-server\src\main\resourse\config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.psx.server.service.impl" />
       <recent name="com.psx.server.controller" />
       <recent name="com.psx.server.mapper" />
       <recent name="com.psx.server.pojo" />
+      <recent name="com.psx.server.service.impl" />
       <recent name="com.psx.server.service" />
     </key>
   </component>
@@ -211,6 +219,15 @@
       <workItem from="1618407029179" duration="1035000" />
       <workItem from="1618617248397" duration="26609000" />
       <workItem from="1618725860185" duration="34003000" />
+      <workItem from="1618901812382" duration="24387000" />
+      <workItem from="1619057060750" duration="12998000" />
+      <workItem from="1619310741137" duration="12029000" />
+      <workItem from="1619483797838" duration="11231000" />
+      <workItem from="1619505447870" duration="1970000" />
+      <workItem from="1619507554611" duration="25414000" />
+      <workItem from="1619832476834" duration="13308000" />
+      <workItem from="1619960243846" duration="4345000" />
+      <workItem from="1620451054054" duration="924000" />
     </task>
     <task id="LOCAL-00001" summary="代码生成">
       <created>1617849555169</created>
@@ -240,11 +257,21 @@
       <option name="project" value="LOCAL" />
       <updated>1618667966649</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="代码生成">
+      <created>1618902097434</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618902097434</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -265,21 +292,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/JwtTokenUtil.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/config/security/JwtTokenUtil.java</url>
-          <line>115</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dlms-server/src/main/java/com/psx/server/service/impl/TUserServiceImpl.java</url>
-          <line>61</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ClassCastException" package="java.lang" />
           <option name="timeStamp" value="22" />

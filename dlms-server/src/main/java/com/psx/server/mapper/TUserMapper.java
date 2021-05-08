@@ -29,4 +29,7 @@ public interface TUserMapper extends BaseMapper<TUser> {
     int getUserByUsername(String username);
 
     IPage<TBook> getUserByPage(Page<TBook> page, @Param("user")TUser user);
+
+
+    List<TUser> getUserList(String keywords, Integer id);
 }

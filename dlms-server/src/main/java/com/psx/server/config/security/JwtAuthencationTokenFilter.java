@@ -34,7 +34,10 @@ public class JwtAuthencationTokenFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest,
+                                    HttpServletResponse httpServletResponse,
+                                    FilterChain filterChain) throws ServletException,
+                                    IOException {
         String authHeader=httpServletRequest.getHeader(tokenHeader);
 //        存在token
         if(authHeader!=null&&authHeader.startsWith(tokenHead)){
@@ -47,8 +50,10 @@ public class JwtAuthencationTokenFilter extends OncePerRequestFilter {
 //                验证token是否有效，重新设置用户对象
                 if(jwtTokenUtil.valuedToken(authToken,userDetails)){
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken=
-                            new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
-                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                            new UsernamePasswordAuthenticationToken(userDetails,null,
+                                    userDetails.getAuthorities());
+                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource()
+                            .buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }

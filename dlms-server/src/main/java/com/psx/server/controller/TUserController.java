@@ -5,15 +5,20 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.psx.server.pojo.RespBean;
 import com.psx.server.pojo.RespPageBean;
 import com.psx.server.pojo.TUser;
-import com.psx.server.pojo.TUserRole;
 import com.psx.server.service.ITUserRoleService;
 import com.psx.server.service.ITUserService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -56,7 +61,7 @@ public class TUserController {
     @DeleteMapping("/user/deleteone/{id}")
     public RespBean DeleteUser(@PathVariable("id") int id){
 //因为存在外键，所以需要先删除联系表中的数据
-        if(userRoleService.deleteById(id)&&userService.removeById(id)){
+        if(userService.removeById(id)){
             return RespBean.success("删除成功");
         }
         return RespBean.error("删除失败");
@@ -77,27 +82,42 @@ public class TUserController {
       if (userService.getOne(new QueryWrapper<TUser>().eq("username",tUser.getUsername()))!=null){
           return RespBean.error("该用户名已存在！请重新添加");
       }
-//因为存在外键，所以需要在关连表添加数据
+        if(tUser.getPassword()==null||tUser.getPassword()==""){
+            tUser.setPassword("123123");
+        }
         if(userService.save(tUser)){
-            TUserRole tUserRole=new TUserRole();
-            tUserRole.setUserid(tUser.getId());
-            tUserRole.setRid(3);
-            if (userRoleService.save(tUserRole))
-                return RespBean.success("添加成功");
-            else
-                return RespBean.error("添加失败");
+            return RespBean.success("添加成功");
         }
         return RespBean.error("添加失败");
     }
-
     @ApiOperation(value = "更新读者信息")
-    @PostMapping("/user/update")
-    public RespBean updateBook(@RequestBody TUser tUser){
+    @PutMapping("/user/update")
+    public RespBean updateUser(@RequestBody TUser tUser, Authentication authentication){
 
         if(userService.updateById(tUser)){
+            SecurityContextHolder.getContext().setAuthentication(
+                    new UsernamePasswordAuthenticationToken(tUser,null,
+                            authentication.getAuthorities())
+            );
             return RespBean.success("更新成功");
         }
         return RespBean.error("更新失败");
     }
+    @ApiOperation(value = "更新用户头像")
+    @PostMapping("/user/icon")
+    public RespBean upload(@ApiParam(value="图片",required=true)@RequestPart("file") MultipartFile file, Integer id, Authentication authentication) {
+        return userService.upload(file,id,authentication);
+    }
+
+    @ApiOperation(value = "更新读者密码")
+    @PutMapping("/user/psw")
+    public RespBean updateUserPassword(@RequestBody Map<String,Object> info){
+        String oldPass=(String) info.get("oldPass");
+        String pass=(String) info.get("pass");
+        Integer userid=(Integer) info.get("userid");
+        return userService.updatePassword(oldPass,pass,userid);
+    }
+
+
 
 }

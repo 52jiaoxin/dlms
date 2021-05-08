@@ -56,9 +56,8 @@ public class LoginController {
 
     @ApiOperation(value = "注册用户")
     @PostMapping("/register")
-    public RespBean register(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest httpServletRequest){
-        return adminService.register(adminLoginParam.getUsername(),adminLoginParam.getPassword(),
-                adminLoginParam.getCode(), httpServletRequest);
+    public RespBean register(@RequestBody TUser user,String code, HttpServletRequest httpServletRequest){
+        return adminService.register(user,code, httpServletRequest);
     }
 
 

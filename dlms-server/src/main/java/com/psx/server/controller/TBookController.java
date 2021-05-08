@@ -56,7 +56,6 @@ public class TBookController {
         }
         return RespBean.error("更新失败");
     }
-
     @ApiOperation(value = "删除图书")
     @DeleteMapping("/book/deleteone/{id}")
     public RespBean deleteBook(@PathVariable("id") int id){
@@ -65,7 +64,6 @@ public class TBookController {
         }
         return RespBean.error("删除失败");
     }
-
     @ApiOperation(value = "批量删除图书")
     @DeleteMapping("/book/deletemany/")
     public RespBean deleteManyBook( Integer[] ids){
@@ -74,7 +72,6 @@ public class TBookController {
         }
         return RespBean.error("删除失败");
     }
-
     @ApiOperation(value = "分页查询图书")
     @GetMapping("/book/page/")
     public RespPageBean getPageBook(@RequestParam(defaultValue = "1") Integer currentPage,
@@ -83,9 +80,6 @@ public class TBookController {
         return bookService.getBookByPage(currentPage,size,book);
 
     }
-
-
-
 
     @ApiOperation(value = "添加图书")
     @PostMapping("/book/insert")

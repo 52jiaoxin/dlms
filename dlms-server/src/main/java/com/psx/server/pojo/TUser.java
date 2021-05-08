@@ -38,8 +38,14 @@ public class TUser implements Serializable, UserDetails {
     @ApiModelProperty(value = "用户名")
     private String username;
 
+    @ApiModelProperty(value = "昵称")
+    private String nickname;
+
     @ApiModelProperty(value = "密码")
     private String password;
+
+    @ApiModelProperty(value = "邮箱")
+    private String mail;
 
     @ApiModelProperty(value = "电话号码")
     private String phone;

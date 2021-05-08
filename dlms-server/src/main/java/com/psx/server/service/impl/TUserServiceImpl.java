@@ -5,23 +5,31 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.psx.server.config.security.JwtTokenUtil;
+import com.psx.server.config.utils.StringUtils;
 import com.psx.server.mapper.TUserMapper;
 import com.psx.server.mapper.TUserRoleMapper;
 import com.psx.server.pojo.*;
 import com.psx.server.service.ITUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author psx
@@ -34,6 +42,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;//用于加密，解密
 
     @Autowired
@@ -41,6 +52,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+
+    @Value("${spring.mail.username}")
+    private String from;
 
     @Autowired
     private TUserMapper userMapper;
@@ -65,10 +79,16 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         }
         //登录
        UserDetails userDetails = userDetailsService.loadUserByUsername(username);//获取UserDetails
-       String newPassword=passwordEncoder.encode(userDetails.getPassword().trim());
-       if (userDetails==null||!passwordEncoder.matches(password,newPassword)){
-           return RespBean.error("用户名或密码错误");
-       }
+        if (userDetails!=null){
+            String newPassword=passwordEncoder.encode(userDetails.getPassword().trim());
+            if (!passwordEncoder.matches(password,newPassword)){
+                return RespBean.error("用户名或密码错误");
+            }
+        }else{
+            return RespBean.error("该用户不存在");
+        }
+
+
         System.out.println(userDetails);
        if (!userDetails.isEnabled())
            return RespBean.error("账号被禁用，请联系管理员");
@@ -100,22 +120,29 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
-    public RespBean register(String username, String password, String code, HttpServletRequest request) {
+    public RespBean register(TUser user, String code, HttpServletRequest request) {
         //校验验证码
-        String kaptcha = (String) request.getSession().getAttribute("kaptcha");
-        if(code==null||!kaptcha.equalsIgnoreCase(code)){
-            return RespBean.error("验证码输入错误！请重新输入");
+        String email = (String) request.getSession().getAttribute("email");
+        String ecode = (String) request.getSession().getAttribute("code");
+
+        if (email==null||email.isEmpty()){
+            return RespBean.error("邮箱错误，请重新注册");
         }
-        if(userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username))!=null){
+        if (!ecode.equals(code)){
+            return RespBean.error("验证码错误");
+        }
+        if(userMapper.selectOne(new QueryWrapper<TUser>().eq("username",user.getUsername()))!=null){
             return RespBean.error("该用户名已存在！请重新输入用户名");
         }
-        TUser user =new TUser();
-        user.setPassword(password);
-        user.setUsername(username);
-        if(userMapper.insertAdmin(user)==1){
-            TUserRole userRole=new TUserRole();
-            userRole.setUserid(userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username)).getId());
-            userRoleMapper.insert(userRole);
+        TUser user1 =new TUser();
+        user1.setPassword(user.getPassword());
+        user1.setUsername(user.getUsername());
+        user1.setMail(user.getMail());
+        System.out.println(user1.getMail());
+        if(userMapper.insert(user1)==1){
+//            TUserRole userRole=new TUserRole();
+//            userRole.setUserid(userMapper.selectOne(new QueryWrapper<TUser>().eq("username",username)).getId());
+//            userRoleMapper.insert(userRole);
             return RespBean.error("注册成功！");
         }
         return RespBean.error("注册有误！请重新注册！");
@@ -138,6 +165,115 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         IPage<TBook> bookIPage=userMapper.getUserByPage(page,user);
         RespPageBean respPageBean=new RespPageBean(bookIPage.getTotal(),bookIPage.getRecords());
         return respPageBean;
+    }
+
+    @Override
+    public RespBean updatePassword(String oldPass, String pass, Integer userid) {
+        TUser user=userMapper.selectById(userid);
+
+        if(user.getPassword().equals(oldPass)){
+            System.out.println(pass);
+            user.setPassword(pass);
+            System.out.println(user.getPassword());
+            if(userMapper.updateById(user)!=0){
+                return RespBean.success("更新成功");
+            }else{
+                return RespBean.error("更新失败");
+            }
+        }
+        return RespBean.error("原密码错误");
+    }
+
+    @Override
+    public List<TUser> getUserList(String keywords, Integer id) {
+        return userMapper.getUserList(keywords,id);
+    }
+
+    @Override
+    public RespBean upload(MultipartFile file, Integer id, Authentication authentication) {
+        String localDir = "H:/photo/user/";
+        //判断文件是否为空
+
+        if(file.isEmpty()!=true){
+            //获得文件名
+            String name=file.getOriginalFilename();
+            //对文件名进行加工
+            String filename= StringUtils.add(name);
+            File dest=new File(localDir+filename);
+            try {
+                //保存文件
+                file.transferTo(dest);
+                if(id==null){
+                    return RespBean.error("",filename);
+                }
+                TUser user=userMapper.selectById(id);
+                user.setIcon(filename);
+                int result=userMapper.updateById(user);
+                if(result==1){
+                    TUser principal=(TUser) authentication.getPrincipal();
+                    principal.setIcon(filename);
+                    SecurityContextHolder.getContext().setAuthentication(
+                            new UsernamePasswordAuthenticationToken(principal,null,
+                                    authentication.getAuthorities()));
+                    return RespBean.success("更新成功",filename);
+                }else{
+                    return  RespBean.error("更新失败");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+               return  RespBean.error("更新失败");
+            }
+        }
+        else {
+            return RespBean.error("上传文件为空！");
+        }
+    }
+
+
+    /*/**
+    * Description:发送邮件
+    * @author: psx
+    * @date: 2021/5/1 10:20
+    * @paramType:[java.lang.String, javax.servlet.http.HttpServletRequest]
+    * @param:[mail, request]
+    * @return:com.psx.server.pojo.RespBean
+    */
+    @Override
+    public RespBean sendMail(String mail, HttpServletRequest request) {
+        try {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+            mailMessage.setSubject("验证码邮件");//主题
+            //生成随机数
+            String code = randomCode();
+            System.out.println(code);
+            //将随机数放置到session中
+            request.getSession().setAttribute("email",mail);
+            request.getSession().setAttribute("code",code);
+
+
+            mailMessage.setText("您收到的验证码是："+code);//内容
+
+            mailMessage.setTo(mail);//发给谁
+
+            mailMessage.setFrom(from);//你自己的邮箱
+
+            mailSender.send(mailMessage);//发送
+            return  RespBean.success("发送成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return RespBean.error("发送失败");
+        }
+    }
+//     生成六位的随机数
+    private String randomCode() {
+        StringBuilder str = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 6; i++) {
+            str.append(random.nextInt(10));
+        }
+        return str.toString();
     }
 
 

@@ -41,10 +41,10 @@ public class Swagger2Config {
 //设置API文档说明
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("基于SpringBoot的数字图书馆管理系统API")
-                .description("基于SpringBoot的数字图书馆管理系统")
+                .title("基于SpringBoot的图书馆管理系统API")
+                .description("基于SpringBoot的图书馆管理系统")
                 //这里的端口就是主配置的端口
-                .contact(new Contact("psx","http:localhost:8080/doc.html","2912508225@qq.com"))
+                .contact(new Contact("psx","http:localhost:8081/doc.html","2912508225@qq.com"))
                 .version("1.0")
                 .build();
     }

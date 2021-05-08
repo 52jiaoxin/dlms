@@ -43,6 +43,25 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
+#邮箱配置
+#平台地址，这里用的是qq邮箱，使用其他邮箱请更换
+  mail:
+    host: smtp.qq.com
+  #改成自己的邮箱
+    username: 1227484810@qq.com
+  #发送短信后它给你的授权码 填写到这里
+    password: dfnqnesfumgabagc
+  #这东西不用改
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+  ##编码格式
+    default-encoding: UTF-8
+
+
+
 #Mybatis-plus配置
 mybatis-plus:
   #配置Mapper映射文件
@@ -63,3 +82,5 @@ logging:
 
 server:
   port: 8081
+
+
