@@ -37,9 +37,9 @@ public class TReaderhistoryController {
                                           @RequestParam(defaultValue = "10")Integer size,
                                           @RequestParam(defaultValue = "") Integer userid,
                                           @RequestParam(defaultValue = "") Integer bookid,
-                                          @RequestParam(defaultValue = "") String username,
+                                          @RequestParam(defaultValue = "") String nickname,
                                           @RequestParam(defaultValue = "") String bookname){
-        return readerhistoryService.getReaderHistory(currentPage,size,userid,bookid,username,bookname);
+        return readerhistoryService.getReaderHistory(currentPage,size,userid,bookid,nickname,bookname);
     }
     @ApiOperation(value = "删除浏览记录")
     @DeleteMapping("/browse/delete")

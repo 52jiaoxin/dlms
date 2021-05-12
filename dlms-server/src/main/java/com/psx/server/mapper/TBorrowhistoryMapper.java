@@ -18,5 +18,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface TBorrowhistoryMapper extends BaseMapper<TBorrowhistory> {
 
-    IPage<TBorrowhistory> getBorrowHistory(Page<TBorrowhistory> page,Integer userid, Integer bookid, String username, String bookname);
+    IPage<TBorrowhistory> getBorrowHistory(Page<TBorrowhistory> page,Integer userid, Integer bookid, String nickname, String bookname);
 }

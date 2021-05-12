@@ -8,8 +8,18 @@ import com.psx.server.config.security.JwtTokenUtil;
 import com.psx.server.config.utils.StringUtils;
 import com.psx.server.mapper.TUserMapper;
 import com.psx.server.mapper.TUserRoleMapper;
-import com.psx.server.pojo.*;
+import com.psx.server.pojo.RespBean;
+import com.psx.server.pojo.RespPageBean;
+import com.psx.server.pojo.TBook;
+import com.psx.server.pojo.TUser;
 import com.psx.server.service.ITUserService;
+import com.qcloud.cos.COSClient;
+import com.qcloud.cos.ClientConfig;
+import com.qcloud.cos.auth.BasicCOSCredentials;
+import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.model.PutObjectRequest;
+import com.qcloud.cos.model.PutObjectResult;
+import com.qcloud.cos.region.Region;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -55,6 +65,19 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
 
     @Value("${spring.mail.username}")
     private String from;
+
+    @Value("${spring.qcloud.secretId}")
+    private String accessKey;
+    @Value("${spring.qcloud.secretKey}")
+    private String secretKey;
+    @Value("${spring.qcloud.region}")
+    private String bucket;
+    @Value("${spring.qcloud.bucketName}")
+    private String bucketName;
+    @Value("${spring.qcloud.url}")
+    private String path;
+    @Value("${spring.qcloud.prefix}")
+    private String qianzui;
 
     @Autowired
     private TUserMapper userMapper;
@@ -149,8 +172,8 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
-    public List<TUser> getEmpList(String username) {
-        return userMapper.getEmpList(username);
+    public List<TUser> getEmpList(String nickname) {
+        return userMapper.getEmpList(nickname);
     }
 
     @Override
@@ -164,9 +187,18 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         Page<TBook> page=new Page<>(currentPage,size);
         IPage<TBook> bookIPage=userMapper.getUserByPage(page,user);
         RespPageBean respPageBean=new RespPageBean(bookIPage.getTotal(),bookIPage.getRecords());
+
         return respPageBean;
     }
 
+    @Override
+    public RespPageBean getReaderByPage(Integer currentPage, Integer size, TUser user) {
+        //        开启分页
+        Page<TBook> page=new Page<>(currentPage,size);
+        IPage<TBook> bookIPage=userMapper.getReaderByPage(page,user);
+        RespPageBean respPageBean=new RespPageBean(bookIPage.getTotal(),bookIPage.getRecords());
+        return respPageBean;
+    }
     @Override
     public RespBean updatePassword(String oldPass, String pass, Integer userid) {
         TUser user=userMapper.selectById(userid);
@@ -185,51 +217,95 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
-    public List<TUser> getUserList(String keywords, Integer id) {
-        return userMapper.getUserList(keywords,id);
+    public List<TUser> getUserList(String keywords, Integer id,String role) {
+        return userMapper.getUserList(keywords,id,role);
     }
 
     @Override
     public RespBean upload(MultipartFile file, Integer id, Authentication authentication) {
-        String localDir = "H:/photo/user/";
-        //判断文件是否为空
+        if (file == null) {
+            return RespBean.error( "文件为空", null);
+        }
+        String oldFileName = file.getOriginalFilename();
+        String newFileName=StringUtils.add(oldFileName);
+        COSCredentials cred = new BasicCOSCredentials(accessKey, secretKey);
+        // 2 设置bucket的区域,
+        ClientConfig clientConfig = new ClientConfig(new Region(bucket));
+        // 3 生成cos客户端
+        COSClient cosclient = new COSClient(cred, clientConfig);
+        // bucket的命名规则为{name}-{appid} ，
+        String bucketName = this.bucketName;
 
-        if(file.isEmpty()!=true){
-            //获得文件名
-            String name=file.getOriginalFilename();
-            //对文件名进行加工
-            String filename= StringUtils.add(name);
-            File dest=new File(localDir+filename);
-            try {
-                //保存文件
-                file.transferTo(dest);
-                if(id==null){
-                    return RespBean.error("",filename);
-                }
-                TUser user=userMapper.selectById(id);
-                user.setIcon(filename);
-                int result=userMapper.updateById(user);
-                if(result==1){
-                    TUser principal=(TUser) authentication.getPrincipal();
-                    principal.setIcon(filename);
-                    SecurityContextHolder.getContext().setAuthentication(
-                            new UsernamePasswordAuthenticationToken(principal,null,
-                                    authentication.getAuthorities()));
-                    return RespBean.success("更新成功",filename);
-                }else{
-                    return  RespBean.error("更新失败");
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-               return  RespBean.error("更新失败");
+        // 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
+        File localFile = null;
+        try {
+            localFile = File.createTempFile("temp", null);
+            file.transferTo(localFile);
+            // 指定要上传到 COS 上的路径
+            String key = "/" + this.qianzui + "/user/"+ newFileName;
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
+            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
+            if(id==null){
+                return RespBean.error("错误");
             }
+            TUser user=userMapper.selectById(id);
+            user.setIcon(newFileName);
+            int result=userMapper.updateById(user);
+            if(result==1){
+                TUser principal=(TUser) authentication.getPrincipal();
+                principal.setIcon(newFileName);
+                SecurityContextHolder.getContext().setAuthentication(
+                        new UsernamePasswordAuthenticationToken(principal,null,
+                                authentication.getAuthorities()));
+                return RespBean.success("更新成功",newFileName);
+            }else{
+                return  RespBean.error("更新失败");
+            }
+        } catch (IOException e) {
+            return RespBean.error(e.getMessage(), null);
+        } finally {
+            // 关闭客户端(关闭后台线程)
+            cosclient.shutdown();
         }
-        else {
-            return RespBean.error("上传文件为空！");
-        }
-    }
 
+//        String localDir = "H:/photo/user/";
+//        //判断文件是否为空
+//
+//        if(file.isEmpty()!=true){
+//            //获得文件名
+//            String name=file.getOriginalFilename();
+//            //对文件名进行加工
+//            String filename= StringUtils.add(name);
+//            File dest=new File(localDir+filename);
+//            try {
+//                //保存文件
+//                file.transferTo(dest);
+//                if(id==null){
+//                    return RespBean.error("",filename);
+//                }
+//                TUser user=userMapper.selectById(id);
+//                user.setIcon(filename);
+//                int result=userMapper.updateById(user);
+//                if(result==1){
+//                    TUser principal=(TUser) authentication.getPrincipal();
+//                    principal.setIcon(filename);
+//                    SecurityContextHolder.getContext().setAuthentication(
+//                            new UsernamePasswordAuthenticationToken(principal,null,
+//                                    authentication.getAuthorities()));
+//                    return RespBean.success("更新成功",filename);
+//                }else{
+//                    return  RespBean.error("更新失败");
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//               return  RespBean.error("更新失败");
+//            }
+//        }
+//        else {
+//            return RespBean.error("上传文件为空！");
+//        }
+    }
 
     /*/**
     * Description:发送邮件

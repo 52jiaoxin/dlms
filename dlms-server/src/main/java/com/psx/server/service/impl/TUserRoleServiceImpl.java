@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.psx.server.mapper.TRoleMapper;
 import com.psx.server.mapper.TUserRoleMapper;
+import com.psx.server.pojo.RespBean;
 import com.psx.server.pojo.TRole;
 import com.psx.server.pojo.TUserRole;
 import com.psx.server.service.ITUserRoleService;
@@ -52,5 +53,15 @@ public class TUserRoleServiceImpl extends ServiceImpl<TUserRoleMapper, TUserRole
     public String getRole(Integer userid) {
         Integer rid=userRoleMapper.selectOne(new QueryWrapper<TUserRole>().eq("userid",userid)).getRid();
         return roleMapper.selectOne(new QueryWrapper<TRole>().eq("id",rid)).getRole();
+    }
+
+    @Override
+    public RespBean upRole(Integer rid, Integer userid) {
+        if(userRoleMapper.upRole(rid,userid)){
+            return RespBean.success("更新成功");
+        }else{
+            return RespBean.error("更新失败");
+        }
+
     }
 }

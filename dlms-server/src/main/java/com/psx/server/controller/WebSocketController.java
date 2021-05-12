@@ -26,6 +26,7 @@ public class WebSocketController {
     public void handleMessage(Authentication authentication, ChatMessage message){
         TUser user=(TUser) authentication.getPrincipal();
         message.setFrom(user.getUsername());
+        message.setFromNickname(user.getNickname());
         message.setTime(LocalDateTime.now());
         System.out.println(message);
 //        发送

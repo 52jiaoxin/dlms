@@ -13,7 +13,7 @@
         <id column="id2" property="id" />
         <result column="id" property="id" />
         <result column="userid" property="userid" />
-        <result column="username" property="username" />
+        <result column="nickname" property="nickname" />
         <result column="bookid" property="bookid" />
         <result column="bookname" property="bookname" />
         <result column="browsetime" property="browsetime" />
@@ -26,7 +26,7 @@
     <select id="getReaderHistory" resultMap="history">
         select t3.id as id,
                t3.userid as userid,
-               t1.username as username,
+               t1.nickname as nickname,
                t3.bookid as bookid,
                t2.name as bookname,
                t3.browsetime as browsetime
@@ -43,8 +43,8 @@
         <if test="bookid!='' and bookid!=null">
             and t2.id=#{bookid}
         </if>
-        <if test="username!='' and username!=null">
-            and t1.username like CONCAT('%',#{username},'%')
+        <if test="nickname!='' and nickname!=null">
+            and t1.nickname like CONCAT('%',#{nickname},'%')
         </if>
         <if test="bookname!='' and bookname!=null">
             and t2.name like CONCAT('%',#{bookname},'%')

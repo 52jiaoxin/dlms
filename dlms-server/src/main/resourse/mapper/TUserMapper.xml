@@ -15,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, username, password, phone, address, icon, enable
+        id, username,nickname, password, phone, address, icon, enable
     </sql>
 
     <insert id="insertAdmin" parameterType="com.psx.server.pojo.TUser">
@@ -27,14 +27,23 @@
         <id column="id2" property="id" />
         <result column="id" property="id" />
         <result column="username" property="username" />
+        <result column="nickname" property="nickname" />
         <result column="phone" property="phone" />
         <result column="address" property="address" />
         <result column="icon" property="icon" />
         <result column="enable" property="enable" />
     </resultMap>
 
+    <resultMap id="list1" type="java.util.Map">
+        <id column="id3" property="id" />
+        <result column="id" property="id" />
+        <result column="nickname" property="nickname" />
+        <result column="role" property="role" />
+    </resultMap>
+
+
     <select id="getEmpList" resultMap="list">
-        select t1.id,t1.username,t1.phone,t1.address,t1.enable,t1.icon,t1.enborrow
+        select t1.id,t1.username,t1.nickname,t1.phone,t1.address,t1.enable,t1.icon,t1.enborrow
         from
             t_user t1,
             t_user_role t2,
@@ -42,10 +51,10 @@
         where
             t1.id=t2.userid
           and t2.rid=t3.id
-          and t3.role != 'reader'
-            and t3.role!='root'
-        <if test="username!=null||username!=''">
-            and t1.username like CONCAT('%',#{username},'%')
+          and t3.role != '读者'
+            and t3.role!='系统管理员'
+        <if test="nickname!=null||nickname!=''">
+            and t1.nickname like CONCAT('%',#{nickname},'%')
         </if>
     </select>
 
@@ -58,15 +67,15 @@
         where
             t1.id=t2.userid
           and t2.rid=t3.id
-          and t3.role = 'reader'
+          and t3.role = '读者'
             <if test="username!=null||username!=''">
                 and t1.username like CONCAT('%',#{username},'%')
             </if>
     </select>
 
 
-    <select id="getUserByPage" resultType="com.psx.server.pojo.TUser">
-        select t1.id,t1.username,t1.phone,t1.address,t1.enable,t1.icon,t1.enborrow
+    <select id="getUserByPage" resultMap="list1">
+        select t1.id,t1.nickname,t3.role
         from
         t_user t1,
         t_user_role t2,
@@ -74,21 +83,54 @@
         where
         t1.id=t2.userid
         and t2.rid=t3.id
-        and t3.role = 'reader'
+        and t3.role != '系统管理员'
         <if test="user.username!=null and user.username!=''">
             and
             `username` like CONCAT('%',#{user.username},'%')
+        </if>
+        <if test="user.nickname!=null and user.nickname!=''">
+            and
+            `nickname` like CONCAT('%',#{user.nickname},'%')
+        </if>
+        ORDER BY id
+    </select>
+
+    <select id="getReaderByPage" resultType="com.psx.server.pojo.TUser">
+        select t1.id,t1.username,t1.nickname,t1.phone,t1.address,t1.enable,t1.icon,t1.enborrow
+        from
+        t_user t1,
+        t_user_role t2,
+        t_role t3
+        where
+        t1.id=t2.userid
+        and t2.rid=t3.id
+        and t3.role = '读者'
+        <if test="user.username!=null and user.username!=''">
+            and
+            `username` like CONCAT('%',#{user.username},'%')
+        </if>
+        <if test="user.nickname!=null and user.nickname!=''">
+            and
+            `nickname` like CONCAT('%',#{user.nickname},'%')
         </if>
         ORDER BY id
     </select>
     <select id="getUserList" resultMap="list">
         select t.id,t.username,t.icon,t.nickname
         from
-        t_user t
+        t_user t,
+        t_user_role t1
         where
-        id!=#{id}
+        t.id!=#{id}
+        and
+        t.id=t1.userid
         <if test="keywords!=null||keywords!=''">
-            and username like CONCAT('%',#{keywords},'%')
+            and nickname like CONCAT('%',#{keywords},'%')
+        </if>
+        <if test="role=='读者'">
+
+            AND
+            t1.rid!=3
         </if>
     </select>
 </mapper>

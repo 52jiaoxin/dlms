@@ -1,10 +1,12 @@
 package com.psx.server.controller;
 
 
+import com.psx.server.pojo.RespBean;
 import com.psx.server.service.ITUserRoleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,8 +26,12 @@ public class TUserRoleController {
     @ApiOperation(value = "获取用户角色")
     @GetMapping("/user/role")
     public String getRole(@RequestParam Integer userid){
-
         return userRoleService.getRole(userid);
+    }
 
+    @ApiOperation(value = "更新用户角色")
+    @PutMapping("/user/uprole")
+    public RespBean upRole(@RequestParam Integer rid,@RequestParam Integer userid){
+        return userRoleService.upRole(rid,userid);
     }
 }

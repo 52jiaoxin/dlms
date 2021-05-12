@@ -18,6 +18,8 @@ public class ChatMessage {
 
 //      来自
     private String from;
+    //      来自
+    private String fromNickname;
 //    去往
     private String to;
 //    内容

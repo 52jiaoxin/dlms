@@ -25,9 +25,9 @@ public class TReaderhistoryServiceImpl extends ServiceImpl<TReaderhistoryMapper,
     private TReaderhistoryMapper readerhistoryMapper;
 
     @Override
-    public RespPageBean getReaderHistory(Integer currentPage, Integer size,Integer userid,Integer bookid,String username,String bookname) {
+    public RespPageBean getReaderHistory(Integer currentPage, Integer size,Integer userid,Integer bookid,String nickname,String bookname) {
         Page<TReaderhistory> page=new Page<>(currentPage,size);
-        IPage<TReaderhistory> bookIPage=readerhistoryMapper.getReaderHistory(page,userid,bookid,username,bookname);
+        IPage<TReaderhistory> bookIPage=readerhistoryMapper.getReaderHistory(page,userid,bookid,nickname,bookname);
         RespPageBean respPageBean=new RespPageBean(bookIPage.getTotal(),bookIPage.getRecords());
         return respPageBean;
 

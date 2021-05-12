@@ -69,4 +69,34 @@ public class TBookServiceImpl extends ServiceImpl<TBookMapper, TBook> implements
         }
         return true;
     }
+
+    @Override
+    public List<String> getBookName() {
+        return tBookMapper.getBookName();
+    }
+
+    @Override
+    public List<Integer> getNum() {
+        return tBookMapper.getNum();
+    }
+
+    @Override
+    public Integer getTotal() {
+        return tBookMapper.getTotal();
+    }
+
+    @Override
+    public List<Integer> getUserNum() {
+        return tBookMapper.getUserNum();
+    }
+
+    @Override
+    public List<String> getUserNickName() {
+        return tBookMapper.getUserNickName();
+    }
+
+    @Override
+    public Integer getUserTotal() {
+        return tBookMapper.getUserTotal();
+    }
 }

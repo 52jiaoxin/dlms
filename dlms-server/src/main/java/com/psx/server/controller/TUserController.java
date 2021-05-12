@@ -38,8 +38,8 @@ public class TUserController {
 
     @ApiOperation(value = "获取图书管理员列表")
     @GetMapping("/emp/list")
-    public List<TUser> EmpList(@RequestParam(defaultValue = "") String username){
-        return userService.getEmpList(username);
+    public List<TUser> EmpList(@RequestParam(defaultValue = "") String nickname){
+        return userService.getEmpList(nickname);
     }
 
     @ApiOperation(value = "获取读者列表")
@@ -68,14 +68,22 @@ public class TUserController {
     }
 
     @ApiOperation(value = "分页查询读者")
-    @GetMapping("/user/page/")
-    public RespPageBean getPageBook(@RequestParam(defaultValue = "1") Integer currentPage,
+    @GetMapping("/reader/page/")
+    public RespPageBean getPageReader(@RequestParam(defaultValue = "1") Integer currentPage,
                                     @RequestParam(defaultValue = "10")Integer size,
                                     TUser user){
-        return userService.getUserByPage(currentPage,size,user);
+        return userService.getReaderByPage(currentPage,size,user);
 
     }
 
+    @ApiOperation(value = "分页查询用户")
+    @GetMapping("/user/page/")
+    public RespPageBean getPageUser(@RequestParam(defaultValue = "1") Integer currentPage,
+                                      @RequestParam(defaultValue = "10")Integer size,
+                                      TUser user){
+        return userService.getUserByPage(currentPage,size,user);
+
+    }
     @ApiOperation(value = "添加用户")
     @PostMapping("/user/insert")
     public RespBean addUser(@RequestBody TUser tUser){
@@ -116,6 +124,20 @@ public class TUserController {
         String pass=(String) info.get("pass");
         Integer userid=(Integer) info.get("userid");
         return userService.updatePassword(oldPass,pass,userid);
+    }
+
+    @ApiOperation(value = "重置读者密码")
+    @PutMapping("/user/resetpsw")
+    public RespBean resetPassword(@RequestParam(defaultValue = "123123") String psw,
+                                  @RequestParam Integer id){
+        TUser user=userService.getById(id);
+        user.setPassword(psw);
+        if (userService.updateById(user)){
+            return RespBean.success("重置成功");
+        }else{
+            return RespBean.error("重置失败");
+        }
+
     }
 
 

@@ -16,4 +16,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface TUserRoleMapper extends BaseMapper<TUserRole> {
 
+    boolean upRole(Integer rid, Integer userid);
 }

@@ -42,6 +42,19 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  qcloud:
+    #API密钥secretId
+    secretId: AKIDEDyUlmNJj131uasBPQChwxkGWAYg879x
+    #API密钥secretKey
+    secretKey: rSr53mFf5HEuUFl0yhBPMLK3VgcHgoy7
+    #存储桶所属地域
+    region: ap-chengdu
+    #存储桶空间名称
+    bucketName: dlms-1258088960
+    #存储桶访问域名
+    url: https://dlms-1258088960.cos.ap-chengdu.myqcloud.com
+    #上传文件前缀路径(eg:/images/)
+    prefix: dlms
 
 #邮箱配置
 #平台地址，这里用的是qq邮箱，使用其他邮箱请更换

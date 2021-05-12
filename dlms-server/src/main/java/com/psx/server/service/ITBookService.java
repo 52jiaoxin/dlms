@@ -26,4 +26,16 @@ public interface ITBookService extends IService<TBook> {
     List<TBook> exportBook(Integer id);
 
     boolean updateByIds(Integer[] borrowids);
+
+    List<String> getBookName();
+
+    List<Integer> getNum();
+
+    Integer getTotal();
+
+    List<Integer> getUserNum();
+
+    List<String> getUserNickName();
+
+    Integer getUserTotal();
 }

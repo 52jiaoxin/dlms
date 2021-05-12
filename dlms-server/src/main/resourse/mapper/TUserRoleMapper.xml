@@ -14,4 +14,8 @@
         id, userid, rid
     </sql>
 
+    <update id="upRole">
+        UPDATE t_user_role set rid=#{rid} where userid=#{userid}
+    </update>
+
 </mapper>

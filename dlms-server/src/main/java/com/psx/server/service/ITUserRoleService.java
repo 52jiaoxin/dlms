@@ -1,6 +1,7 @@
 package com.psx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.psx.server.pojo.RespBean;
 import com.psx.server.pojo.TUserRole;
 
 
@@ -19,4 +20,6 @@ public interface ITUserRoleService extends IService<TUserRole> {
     boolean deleteByIds(Integer[] ids);
 
     String getRole(Integer userid);
+
+    RespBean upRole(Integer rid, Integer userid);
 }

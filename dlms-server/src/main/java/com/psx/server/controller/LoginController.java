@@ -31,6 +31,7 @@ public class LoginController {
 
     @ApiOperation(value = "用户登录之后返回token")
     @PostMapping("/login")
+//    AdminLoginParam是一个用于登录的公共类
     public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest httpServletRequest){
         RespBean respBean=adminService.login(adminLoginParam.getUsername(),adminLoginParam.getPassword(),
                 adminLoginParam.getCode(),httpServletRequest);

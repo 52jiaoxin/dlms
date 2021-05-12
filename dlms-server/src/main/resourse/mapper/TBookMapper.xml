@@ -66,4 +66,36 @@
         </if>
         ORDER BY t_book.id
     </select>
+
+    <select id="getBookName" resultType="java.lang.String">
+        SELECT name from t_book where id in (
+            SELECT t.bookid from
+                (SELECT bookid,COUNT(*) as num from t_borrowhistory
+                 GROUP BY bookid ORDER BY num DESC LIMIT 10
+                ) t
+        )
+    </select>
+
+    <select id="getNum" resultType="java.lang.Integer">
+        SELECT COUNT(*) as num from t_borrowhistory GROUP BY bookid ORDER BY num DESC LIMIT 10;
+    </select>
+    <select id="getTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) from t_borrowhistory;
+    </select>
+    <select id="getUserTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) as num from (SELECT COUNT(*) from t_borrowhistory GROUP BY userid)t ;
+    </select>
+    <select id="getUserNum" resultType="java.lang.Integer">
+        SELECT  COUNT(*) as num from t_borrowhistory GROUP BY userid ORDER BY num DESC LIMIT 10;
+    </select>
+
+    <select id="getUserNickName" resultType="java.lang.String">
+        SELECT nickname from t_user where id in (
+            SELECT t.userid from
+                (SELECT userid,COUNT(*) as num from t_borrowhistory
+                 GROUP BY userid ORDER BY num DESC LIMIT 10
+                ) t
+        )
+    </select>
+
 </mapper>

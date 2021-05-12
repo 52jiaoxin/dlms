@@ -27,9 +27,9 @@ public class TBorrowhistoryServiceImpl extends ServiceImpl<TBorrowhistoryMapper,
 
 
     @Override
-    public RespPageBean getBorrowHistory(Integer currentPage, Integer size,Integer userid,Integer bookid,String username,String bookname) {
+    public RespPageBean getBorrowHistory(Integer currentPage, Integer size,Integer userid,Integer bookid,String nickname,String bookname) {
         Page<TBorrowhistory> page=new Page<>(currentPage,size);
-        IPage<TBorrowhistory> bookIPage=borrowhistoryMapper.getBorrowHistory(page,userid,bookid,username,bookname);
+        IPage<TBorrowhistory> bookIPage=borrowhistoryMapper.getBorrowHistory(page,userid,bookid,nickname,bookname);
         RespPageBean respPageBean=new RespPageBean(bookIPage.getTotal(),bookIPage.getRecords());
         return respPageBean;
 

@@ -21,8 +21,8 @@ import java.util.List;
 @Component
 public interface TUserMapper extends BaseMapper<TUser> {
 
-    public int insertAdmin(TUser user);
-    public List<TUser> getEmpList(String username);
+    int insertAdmin(TUser user);
+    List<TUser> getEmpList(String nickname);
 
     List<TUser> getReaderList(String username);
 
@@ -31,5 +31,7 @@ public interface TUserMapper extends BaseMapper<TUser> {
     IPage<TBook> getUserByPage(Page<TBook> page, @Param("user")TUser user);
 
 
-    List<TUser> getUserList(String keywords, Integer id);
+    List<TUser> getUserList(String keywords, Integer id,String role);
+
+    IPage<TBook> getReaderByPage(Page<TBook> page, TUser user);
 }

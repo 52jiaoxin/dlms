@@ -29,4 +29,16 @@ public interface TBookMapper extends BaseMapper<TBook> {
     IPage<TBook> getBookByPage(Page<TBook> page, @Param("book")TBook book);
 
     List<TBook> exportBook(Integer id);
+
+    List<String> getBookName();
+
+    List<Integer> getNum();
+
+    Integer getTotal();
+
+    List<Integer> getUserNum();
+
+    List<String> getUserNickName();
+
+    Integer getUserTotal();
 }

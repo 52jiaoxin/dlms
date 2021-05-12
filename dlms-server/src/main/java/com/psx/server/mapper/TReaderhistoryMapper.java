@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface TReaderhistoryMapper extends BaseMapper<TReaderhistory> {
 
-    IPage<TReaderhistory> getReaderHistory(Page<TReaderhistory> page, Integer userid, Integer bookid, String username, String bookname);
+    IPage<TReaderhistory> getReaderHistory(Page<TReaderhistory> page, Integer userid, Integer bookid, String nickname, String bookname);
 
     int clear();
 }

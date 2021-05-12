@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 聊天
+ * 聊天用户列表
  * @author psx
  * @date 2021/4/21 9:53
  */
@@ -25,8 +25,9 @@ public class ChatController {
     @ApiOperation(value = "获取所有操作员")
     @GetMapping("/users")
     public List<TUser> getALl(@RequestParam(defaultValue = "") String keywords,
-                              @RequestParam(defaultValue = "") Integer id){
-        return userService.getUserList(keywords,id);
+                              @RequestParam(defaultValue = "") Integer id,
+                              @RequestParam(defaultValue = "") String role){
+        return userService.getUserList(keywords,id,role);
     }
 
 

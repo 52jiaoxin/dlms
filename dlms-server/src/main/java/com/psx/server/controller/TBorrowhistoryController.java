@@ -36,9 +36,9 @@ public class TBorrowhistoryController {
                                               @RequestParam(defaultValue = "10")Integer size,
                                               @RequestParam(defaultValue = "") Integer userid,
                                               @RequestParam(defaultValue = "") Integer bookid,
-                                              @RequestParam(defaultValue = "") String username,
+                                              @RequestParam(defaultValue = "") String nickname,
                                               @RequestParam(defaultValue = "") String bookname){
-        return borrowhistoryService.getBorrowHistory(currentPage,size,userid,bookid,username,bookname);
+        return borrowhistoryService.getBorrowHistory(currentPage,size,userid,bookid,nickname,bookname);
     }
 
     @ApiOperation(value = "批量删除借阅记录")

@@ -32,10 +32,12 @@ public interface ITUserService extends IService<TUser> {
 
     RespBean updatePassword(String oldPass, String pass, Integer userid);
 
-    List<TUser> getUserList(String keywords,Integer id);
+    List<TUser> getUserList(String keywords,Integer id,String role);
 
 
     RespBean upload(MultipartFile file, Integer id, Authentication authentication);
 
     RespBean sendMail(String mail, HttpServletRequest request);
+
+    RespPageBean getReaderByPage(Integer currentPage, Integer size, TUser user);
 }
